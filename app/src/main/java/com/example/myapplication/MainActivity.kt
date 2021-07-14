@@ -17,9 +17,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         private var POST_URL_AB = "https://ab.staging.okcredit.in/v1/GetProfile"
         private var AB_BODY = """{
-    "device_id": "86c20472-5ff6-4d23-b1f6-546bb041b7d3",
-    "merchant_id": ""
-}"""
+                "device_id": "86c20472-5ff6-4d23-b1f6-546bb041b7d3",
+                "merchant_id": ""
+        }"""
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,6 +27,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(R.layout.activity_main)
         findViewById<View>(R.id.postOkhttp).setOnClickListener(this)
         findViewById<View>(R.id.postRetrofit).setOnClickListener(this)
+        findViewById<View>(R.id.postAsyncTask).setOnClickListener(this)
         txtString = findViewById(R.id.txtString)
     }
 
@@ -40,7 +41,16 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             R.id.postRetrofit -> {
                 postRequestRetrofit()
             }
+            R.id.postAsyncTask -> {
+                postAsyncTask()
+            }
         }
+    }
+
+    private fun postAsyncTask() {
+        val postRequest = AsynTaskPost.POSTRequest()
+
+        postRequest.execute(POST_URL_AB, AB_BODY)
     }
 
     @Throws(IOException::class)

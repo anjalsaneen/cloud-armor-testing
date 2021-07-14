@@ -5,10 +5,13 @@ import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
+import retrofit2.http.Header
+import retrofit2.http.Headers
 import retrofit2.http.POST
 
 interface ApiInterface {
 
+    @Headers("userAgent: retrofit-123")
     @POST("v1/GetProfile")
     fun getAB(@Body req: GetProfileRequest) : Call<GetProfileResponse>
 
